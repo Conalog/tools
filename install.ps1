@@ -1,7 +1,7 @@
 # Conalog CLI installer for Windows
 #
 # Usage:
-#   irm https://raw.githubusercontent.com/Conalog/cli/main/install.ps1 | iex
+#   irm https://raw.githubusercontent.com/Conalog/tools/main/install.ps1 | iex
 #
 # Environment variables:
 #   CONALOG_VERSION     - Version to install (default: latest)
@@ -9,7 +9,7 @@
 
 $ErrorActionPreference = "Stop"
 
-$Repo = "Conalog/cli"
+$Repo = "Conalog/tools"
 $BinaryName = "conalog.exe"
 $DefaultInstallDir = Join-Path $HOME ".conalog\bin"
 $MaxRetries = 3

@@ -2,7 +2,7 @@
 # Conalog CLI installer
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/Conalog/cli/main/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
 #   curl -sSL ... | bash -s -- --version v0.1.0
 #   curl -sSL ... | bash -s -- --bin-dir ~/.local/bin
 #
@@ -16,7 +16,7 @@
 
 set -euo pipefail
 
-REPO="Conalog/cli"
+REPO="Conalog/tools"
 BINARY_NAME="conalog"
 INSTALL_DIR="${CONALOG_INSTALL_DIR:-/usr/local/bin}"
 VERSION="${CONALOG_VERSION:-}"
@@ -106,7 +106,7 @@ Environment Variables:
 
 Examples:
   # Install latest version
-  curl -sSL https://raw.githubusercontent.com/Conalog/cli/main/install.sh | bash
+  curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
 
   # Install specific version
   curl -sSL ... | bash -s -- --version v0.1.0
