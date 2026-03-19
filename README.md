@@ -50,6 +50,7 @@ conalog list
 ```bash
 conalog install code-reviewer              # 최신 버전 설치
 conalog install code-reviewer planner      # 여러 패키지 동시 설치
+conalog install --all                      # 모든 패키지 설치
 ```
 
 설치 경로:
