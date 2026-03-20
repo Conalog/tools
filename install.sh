@@ -359,9 +359,9 @@ main() {
     check_path
 
     echo "Next steps:"
-    echo "  1. conalog login          # Authenticate with Google"
-    echo "  2. conalog list            # Browse available packages"
-    echo "  3. conalog install <name>  # Install a package"
+    echo "  1. conalog login                    # Authenticate with Google"
+    echo "  2. conalog library list              # Browse available packages"
+    echo "  3. conalog library install <name>    # Install a package"
     echo ""
 }
 

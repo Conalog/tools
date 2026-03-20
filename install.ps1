@@ -196,9 +196,9 @@ function Install-Conalog {
         Write-Host ""
         Write-Host "Next steps:"
         Write-Host "  1. Restart your terminal (or open a new one)"
-        Write-Host "  2. conalog login          # Authenticate with Google"
-        Write-Host "  3. conalog list            # Browse available packages"
-        Write-Host "  4. conalog install <name>  # Install a package"
+        Write-Host "  2. conalog login                    # Authenticate with Google"
+        Write-Host "  3. conalog library list              # Browse available packages"
+        Write-Host "  4. conalog library install <name>    # Install a package"
         Write-Host ""
     } finally {
         Remove-Item -Path $tmpDir -Recurse -Force -ErrorAction SilentlyContinue

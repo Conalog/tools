@@ -20,73 +20,37 @@ irm https://raw.githubusercontent.com/Conalog/tools/main/install.ps1 | iex
 
 ## 사용법
 
+### 인증
 
 ```bash
-conalog login
+conalog login           # Google OAuth로 브라우저 인증
+conalog whoami          # 현재 인증 상태 확인
+conalog logout          # 저장된 인증 정보 삭제
 ```
 
-브라우저가 열리고 로그인 후 자동으로 인증이 완료됩니다.
+### 라이브러리 (`conalog library`)
 
-현재 인증 상태 확인:
-
-```bash
-conalog whoami
-```
-
-### 패키지 검색
+`library` (단축: `lib`) 서브커맨드로 패키지를 관리합니다.
 
 ```bash
-conalog search code-review
-```
+conalog library search code-review                # 패키지/리소스 검색
+conalog library list                               # 설치 가능한 패키지 목록
+conalog library list --installed                   # 설치된 패키지 확인
 
-### 설치 가능한 패키지 목록
+conalog library install code-reviewer              # 최신 버전 설치
+conalog library install code-reviewer planner      # 여러 패키지 동시 설치
+conalog library install --all                      # 모든 패키지 설치
 
-```bash
-conalog list
-```
+conalog library update                             # 전체 업데이트
+conalog library update code-reviewer               # 특정 패키지만
 
-### 패키지 설치
-
-```bash
-conalog install code-reviewer              # 최신 버전 설치
-conalog install code-reviewer planner      # 여러 패키지 동시 설치
-conalog install --all                      # 모든 패키지 설치
+conalog library info code-reviewer                 # 패키지 상세 정보
+conalog library uninstall code-reviewer            # 패키지 삭제
 ```
 
 설치 경로:
 - skill → `$HOME/.agents/skills/<name>/`
 - agent → `$HOME/.codex/agents/<name>.toml`
-
-### 설치된 패키지 확인
-
-```bash
-conalog list --installed
-```
-
-### 패키지 업데이트
-
-```bash
-conalog update              # 전체 업데이트
-conalog update code-reviewer  # 특정 패키지만
-```
-
-### 패키지 상세 정보
-
-```bash
-conalog info code-reviewer
-```
-
-### 패키지 삭제
-
-```bash
-conalog uninstall code-reviewer
-```
-
-### 로그아웃
-
-```bash
-conalog logout
-```
 
 ## 설정
 
