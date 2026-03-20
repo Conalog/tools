@@ -48,6 +48,23 @@ conalog library info code-reviewer                 # 패키지 상세 정보
 conalog library uninstall code-reviewer            # 패키지 삭제
 ```
 
+### 패키지 배포 (`publish`)
+
+```bash
+# 디렉터리를 패키지로 배포 (자동으로 tar.gz 생성)
+conalog library publish ./my-skill --slug my-skill --type skill --version 0.1.0
+
+# tar.gz 아카이브 직접 배포
+conalog library publish ./my-skill.tar.gz --slug my-skill --type skill --version 0.2.0
+
+# 기존 패키지에 새 릴리즈 추가 (--type 생략 가능)
+conalog library publish ./my-skill --slug my-skill --version 0.3.0
+```
+
+필수 플래그: `--slug`, `--version`
+신규 패키지일 경우: `--type` (skill 또는 agent) 필수
+선택 플래그: `--name`, `--description`, `--changelog`, `--tags`
+
 설치 경로:
 - skill → `$HOME/.agents/skills/<name>/`
 - agent → `$HOME/.codex/agents/<name>.toml`
