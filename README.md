@@ -86,6 +86,10 @@ conalog library publish ./my-skill \
 # 기존 패키지에 새 릴리즈 추가 (--type 생략 가능)
 conalog library publish ./my-skill \
   --slug my-skill --version 0.2.0 --changelog "버그 수정"
+
+# 패키지 deprecation
+conalog library deprecate <slug> -m "대체 패키지: new-skill"
+conalog library deprecate <slug> --undo    # deprecation 해제
 ```
 
 | 플래그 | 설명 |
