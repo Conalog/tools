@@ -4,28 +4,68 @@
 
 CLI는 인증(login/logout/whoami)만 담당하고, 패키지 검색·설치·배포는 LLM이 REST API를 직접 호출하여 수행합니다.
 
-## Quick Setup
+---
+
+## LLM 시작 가이드
+
+**이 파일을 읽는 LLM은 아래 순서대로 진행하세요.**
+
+### 1단계: 로그인 상태 확인
 
 ```bash
-# 1. CLI 설치 (macOS/Linux)
-curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
+conalog-library whoami
+```
 
-# 2. 로그인 (Google OAuth, 브라우저가 자동으로 열림)
+- **로그인된 경우**: `Logged in as <email>` 출력 → 2단계로
+- **로그인 안 된 경우**: 사용자에게 아래 명령 실행을 요청하세요.
+
+```bash
+conalog-library login   # 브라우저로 Google OAuth 인증
+```
+
+`conalog-library login`은 인증 완료 후 **API 가이드를 자동으로 출력**합니다. 출력된 가이드를 따라 패키지를 설치하세요.
+
+### 2단계: API 가이드 가져오기
+
+이미 로그인된 상태에서 가이드를 다시 보려면:
+
+```bash
 conalog-library login
 ```
 
-Windows (PowerShell):
+> 가이드에는 패키지 검색·다운로드·설치·배포 방법이 모두 담겨 있습니다.
+
+---
+
+## 처음 설치하는 경우
+
+`conalog-library` CLI가 없다면 먼저 설치합니다.
+
+**macOS / Linux:**
+
+```bash
+curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
 
 ```powershell
 irm https://raw.githubusercontent.com/Conalog/tools/main/install.ps1 | iex
-conalog-library login
 ```
 
-로그인 후 LLM이 API 가이드를 읽고 패키지를 자동으로 검색·설치합니다.
+설치 후 `conalog-library login`으로 인증합니다.
+
+## CLI 명령어
+
+```bash
+conalog-library login     # Google OAuth 로그인 (완료 후 가이드 자동 출력)
+conalog-library logout    # 저장된 인증 정보 삭제
+conalog-library whoami    # 현재 로그인 상태 확인
+```
+
+CI/CD 환경에서는 `CONALOG_TOKEN` 환경변수로 토큰을 직접 지정할 수 있습니다.
 
 ## 설치 옵션
-
-특정 버전을 설치하거나 바이너리를 직접 다운로드할 수 있습니다.
 
 ```bash
 # 특정 버전 설치
@@ -36,39 +76,6 @@ curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
 ```
 
 또는 [GitHub Releases](https://github.com/Conalog/tools/releases)에서 바이너리를 직접 다운로드.
-
-## CLI 명령어
-
-```bash
-conalog-library login     # Google OAuth 로그인
-conalog-library logout    # 저장된 인증 정보 삭제
-conalog-library whoami    # 현재 인증 상태 확인
-```
-
-CI/CD 환경에서는 `CONALOG_TOKEN` 환경변수로 토큰을 직접 지정할 수 있습니다.
-
-## LLM 연동
-
-LLM(Claude Code, Codex 등)은 아래 엔드포인트를 통해 패키지를 관리합니다.
-
-- **API 가이드**: `GET /api/library/guide` — 인증, 검색, 다운로드, 설치, 배포 방법을 Markdown으로 제공 (인증 필요)
-- **API 문서**: `/docs` (Swagger UI)
-
-### 설치 경로
-
-| 타입 | 경로 |
-|------|------|
-| Skill | `~/.agents/skills/<slug>/` (디렉토리) |
-| Agent | `~/.codex/agents/<slug>.toml` (단일 파일) |
-
-### 패키지 배포
-
-LLM이 API 가이드의 publish 섹션을 참조하여 multipart POST로 배포합니다.
-
-| 아카이브 요구사항 | |
-|------|-----------|
-| Skill | `SKILL.md` 필수 (YAML frontmatter: `name`, `description`) |
-| Agent | `.toml` 파일 1개 이상 |
 
 ## 설정
 
