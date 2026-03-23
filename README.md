@@ -1,10 +1,8 @@
-# conalog
+# conalog-library
 
 사내 라이브러리에서 Codex Skills, Agents를 설치·관리하는 CLI 도구.
 
 ## 명령 결정표
-
-모든 명령은 `conalog library` (축약: `conalog lib`) 하위에 있습니다.
 
 | 명령 | 범위 | 효과 | 인증 |
 |------|------|------|------|
@@ -20,8 +18,8 @@
 | `uninstall <slug>` | **로컬만** | 로컬 파일 삭제 (서버에는 영향 없음) | - |
 | `publish <path>` | 로컬 → 서버 | 로컬 디렉토리/아카이브를 서버에 배포 | O |
 | `deprecate <slug>` | **서버만** | 패키지에 deprecation 표시 (설치는 가능) | O |
-| `unpublish <slug>` | **서버만** | 서버에서 soft-delete (로컬 파일은 유지) | O |
-| `repair` | **로컬만** | 설치 인덱스 검사/복구 (파일 삭제 없음) | - |
+| `unpublish <slug>` | **서버만** | 서버에서 목록 숨김 (soft-delete, 관리자 복원 가능) | O |
+| `doctor` | **로컬만** | 설치 인덱스 검사/복구 (파일 삭제 없음) | - |
 
 > **uninstall vs unpublish**
 > - `uninstall`: 내 컴퓨터에서 패키지 파일을 삭제합니다. 서버의 패키지는 그대로 남아 있습니다.
@@ -36,18 +34,18 @@
 curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
 
 # 2. 로그인 (Google OAuth, 브라우저가 자동으로 열림)
-conalog library login
+conalog-library login
 
 # 3. 모든 스킬/에이전트 설치
-conalog library install --all
+conalog-library install --all
 ```
 
 Windows (PowerShell):
 
 ```powershell
 irm https://raw.githubusercontent.com/Conalog/tools/main/install.ps1 | iex
-conalog library login
-conalog library install --all
+conalog-library login
+conalog-library install --all
 ```
 
 설치된 스킬과 에이전트는 즉시 사용할 수 있습니다.
@@ -68,35 +66,36 @@ curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
 
 ## 사용법
 
-### `conalog library` (`conalog lib`)
+### `conalog-library`
 
 ```bash
+# 패키지 조회
+conalog-library search <query>          # 패키지/리소스 검색
+conalog-library list                    # 설치 가능한 패키지 목록 (서버)
+conalog-library list --installed        # 로컬에 설치된 패키지 확인
+conalog-library info <slug>             # 패키지 상세 정보
+
+# 패키지 설치/관리
+conalog-library install <slug>          # 최신 버전 설치
+conalog-library install <a> <b>         # 여러 패키지 동시 설치
+conalog-library install --all           # 모든 패키지 일괄 설치
+conalog-library update                  # 설치된 모든 패키지 업데이트
+conalog-library update <slug>           # 특정 패키지만 업데이트
+conalog-library uninstall <slug>        # 로컬 파일만 삭제 (서버에는 영향 없음)
+
 # 인증
-conalog library login                      # Google OAuth 로그인
-conalog library whoami                     # 현재 인증 상태 확인
-conalog library logout                     # 저장된 인증 정보 삭제
+conalog-library login                   # Google OAuth 로그인
+conalog-library whoami                  # 현재 인증 상태 확인
+conalog-library logout                  # 저장된 인증 정보 삭제
 
-# 패키지 검색 / 조회
-conalog library search <query>          # 패키지/리소스 검색
-conalog library list                    # 설치 가능한 패키지 목록
-conalog library list --installed        # 로컬에 설치된 패키지 확인
-conalog library info <slug>             # 패키지 상세 정보
-
-# 설치 / 업데이트 (서버 → 로컬)
-conalog library install <slug>          # 최신 버전 설치
-conalog library install <a> <b>         # 여러 패키지 동시 설치
-conalog library install --all           # 모든 패키지 일괄 설치
-conalog library update                  # 설치된 모든 패키지 업데이트
-conalog library update <slug>           # 특정 패키지만 업데이트
-
-# 제거 — 로컬과 서버는 별개
-conalog library uninstall <slug>        # 로컬 파일만 삭제 (서버에는 영향 없음)
-conalog library unpublish <slug>        # 서버에서 soft-delete (로컬 파일은 유지됨)
-conalog library deprecate <slug> -m "대체: new-skill"  # deprecation 표시 (설치는 가능)
-conalog library deprecate <slug> --undo                # deprecation 해제
+# 배포/관리자
+conalog-library publish <path>          # 패키지를 서버에 배포
+conalog-library unpublish <slug>        # 서버에서 목록 숨김 (soft-delete)
+conalog-library deprecate <slug> -m "대체: new-skill"  # deprecation 표시
+conalog-library deprecate <slug> --undo                # deprecation 해제
 
 # 유지보수
-conalog library repair                  # 설치 인덱스 검사/복구 (파일 삭제 없음)
+conalog-library doctor                  # 설치 인덱스 검사/복구 (파일 삭제 없음)
 ```
 
 ### 설치 경로
@@ -110,17 +109,17 @@ conalog library repair                  # 설치 인덱스 검사/복구 (파일
 
 ```bash
 # 디렉토리를 패키지로 배포 (자동으로 tar.gz 생성)
-conalog library publish ./my-skill \
-  --slug my-skill --type skill --version 0.1.0
+conalog-library publish ./my-skill \
+  --slug conalog-my-skill --type skill --version 0.1.0
 
 # 기존 패키지에 새 릴리즈 추가 (--type 생략 가능)
-conalog library publish ./my-skill \
-  --slug my-skill --version 0.2.0 --changelog "버그 수정"
+conalog-library publish ./my-skill \
+  --slug conalog-my-skill --version 0.2.0 --changelog "버그 수정"
 ```
 
 | 플래그 | 설명 |
 |--------|------|
-| `--slug` | 패키지 식별자 (필수) |
+| `--slug` | 패키지 식별자 (필수, `conalog-` 접두어) |
 | `--type` | `skill` 또는 `agent` (신규 패키지 시 필수) |
 | `--version` | 버전 문자열 (필수) |
 | `--name` | 표시 이름 |
@@ -140,4 +139,4 @@ conalog library publish ./my-skill \
 | 환경변수 | 설명 |
 |----------|------|
 | `CONALOG_SERVER` | 서버 주소 override (기본값 내장) |
-| `CONALOG_TOKEN` | CI/CD용 인증 토큰 (`conalog library login` 대체) |
+| `CONALOG_TOKEN` | CI/CD용 인증 토큰 (`conalog-library login` 대체) |

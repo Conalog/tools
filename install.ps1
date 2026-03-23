@@ -10,7 +10,7 @@
 $ErrorActionPreference = "Stop"
 
 $Repo = "Conalog/tools"
-$BinaryName = "conalog.exe"
+$BinaryName = "conalog-library.exe"
 $DefaultInstallDir = Join-Path $HOME ".conalog\bin"
 $MaxRetries = 3
 
@@ -153,7 +153,7 @@ function Install-Conalog {
 
     # Build download URLs
     $verNoV = $version.TrimStart("v")
-    $archiveName = "conalog_${verNoV}_${platform}.zip"
+    $archiveName = "conalog-library_${verNoV}_${platform}.zip"
     $downloadUrl = "https://github.com/$Repo/releases/download/$version/$archiveName"
     $checksumUrl = "https://github.com/$Repo/releases/download/$version/checksums.txt"
 
@@ -192,17 +192,17 @@ function Install-Conalog {
         # Add to PATH
         Add-ToUserPath -Dir $installDir
 
-        Write-Ok "Installed conalog $version"
+        Write-Ok "Installed conalog-library $version"
         Write-Host ""
         Write-Host "Next steps:"
         Write-Host "  1. Restart your terminal (or open a new one)"
-        Write-Host "  2. conalog library login             # Google 인증"
-        Write-Host "  3. conalog library list              # 패키지 목록 조회"
-        Write-Host "  4. conalog library install <name>    # 패키지 설치"
+        Write-Host "  2. conalog-library login             # Google 인증"
+        Write-Host "  3. conalog-library list              # 패키지 목록 조회"
+        Write-Host "  4. conalog-library install <name>    # 패키지 설치"
         Write-Host ""
-        Write-Host "패키지 배포: conalog library publish --help"
+        Write-Host "패키지 배포: conalog-library publish --help"
         Write-Host "패키지 제거: uninstall (로컬 삭제) / unpublish (서버 숨김)"
-        Write-Host "전체 명령어: conalog library --help"
+        Write-Host "전체 명령어: conalog-library --help"
         Write-Host ""
     } finally {
         Remove-Item -Path $tmpDir -Recurse -Force -ErrorAction SilentlyContinue

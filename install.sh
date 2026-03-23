@@ -17,7 +17,7 @@
 set -euo pipefail
 
 REPO="Conalog/tools"
-BINARY_NAME="conalog"
+BINARY_NAME="conalog-library"
 INSTALL_DIR="${CONALOG_INSTALL_DIR:-/usr/local/bin}"
 VERSION="${CONALOG_VERSION:-}"
 MAX_RETRIES=3
@@ -354,18 +354,18 @@ main() {
         sudo install -m 755 "${tmp_dir}/${BINARY_NAME}" "${INSTALL_DIR}/${BINARY_NAME}"
     fi
 
-    success "Installed conalog ${version}"
+    success "Installed conalog-library ${version}"
 
     check_path
 
     echo "Next steps:"
-    echo "  1. conalog library login             # Google 인증"
-    echo "  2. conalog library list              # 패키지 목록 조회"
-    echo "  3. conalog library install <name>    # 패키지 설치"
+    echo "  1. conalog-library login             # Google 인증"
+    echo "  2. conalog-library list              # 패키지 목록 조회"
+    echo "  3. conalog-library install <name>    # 패키지 설치"
     echo ""
-    echo "패키지 배포: conalog library publish --help"
+    echo "패키지 배포: conalog-library publish --help"
     echo "패키지 제거: uninstall (로컬 삭제) / unpublish (서버 숨김)"
-    echo "전체 명령어: conalog library --help"
+    echo "전체 명령어: conalog-library --help"
     echo ""
 }
 
