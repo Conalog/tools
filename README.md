@@ -16,7 +16,7 @@
 | `install <slug>` | 서버 → 로컬 | 서버에서 다운로드하여 로컬에 설치 | O |
 | `update [slug]` | 서버 → 로컬 | 설치된 패키지를 최신 버전으로 업데이트 | O |
 | `uninstall <slug>` | **로컬만** | 로컬 파일 삭제 (서버에는 영향 없음) | - |
-| `publish <path>` | 로컬 → 서버 | 로컬 디렉토리/아카이브를 서버에 배포 | O |
+| `publish <path>` | 로컬 → 서버 → 로컬 | 서버에 배포 후 로컬에도 자동 설치 | O |
 | `deprecate <slug>` | **서버만** | 패키지에 deprecation 표시 (설치는 가능) | O |
 | `unpublish <slug>` | **서버만** | 서버에서 목록 숨김 (soft-delete, 관리자 복원 가능) | O |
 | `doctor` | **로컬만** | 설치 인덱스 검사/복구 (파일 삭제 없음) | - |
@@ -89,7 +89,7 @@ conalog-library whoami                  # 현재 인증 상태 확인
 conalog-library logout                  # 저장된 인증 정보 삭제
 
 # 배포/관리자
-conalog-library publish <path>          # 패키지를 서버에 배포
+conalog-library publish <path>          # 서버에 배포 + 로컬 자동 설치
 conalog-library unpublish <slug>        # 서버에서 목록 숨김 (soft-delete)
 conalog-library deprecate <slug> -m "대체: new-skill"  # deprecation 표시
 conalog-library deprecate <slug> --undo                # deprecation 해제
