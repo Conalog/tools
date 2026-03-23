@@ -21,6 +21,7 @@
 | `publish <path>` | 로컬 → 서버 | 로컬 디렉토리/아카이브를 서버에 배포 | O |
 | `deprecate <slug>` | **서버만** | 패키지에 deprecation 표시 (설치는 가능) | O |
 | `unpublish <slug>` | **서버만** | 서버에서 soft-delete (로컬 파일은 유지) | O |
+| `repair` | **로컬만** | 설치 인덱스 검사/복구 (파일 삭제 없음) | - |
 
 > **uninstall vs unpublish**
 > - `uninstall`: 내 컴퓨터에서 패키지 파일을 삭제합니다. 서버의 패키지는 그대로 남아 있습니다.
@@ -93,6 +94,9 @@ conalog library uninstall <slug>        # 로컬 파일만 삭제 (서버에는 
 conalog library unpublish <slug>        # 서버에서 soft-delete (로컬 파일은 유지됨)
 conalog library deprecate <slug> -m "대체: new-skill"  # deprecation 표시 (설치는 가능)
 conalog library deprecate <slug> --undo                # deprecation 해제
+
+# 유지보수
+conalog library repair                  # 설치 인덱스 검사/복구 (파일 삭제 없음)
 ```
 
 ### 설치 경로
