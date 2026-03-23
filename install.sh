@@ -359,11 +359,13 @@ main() {
     check_path
 
     echo "Next steps:"
-    echo "  1. conalog library login             # Authenticate with Google"
-    echo "  2. conalog library list              # Browse available packages"
-    echo "  3. conalog library install <name>    # Install a package"
+    echo "  1. conalog library login             # Google 인증"
+    echo "  2. conalog library list              # 패키지 목록 조회"
+    echo "  3. conalog library install <name>    # 패키지 설치"
     echo ""
-    echo "Run 'conalog library --help' to see all commands (publish, uninstall, etc.)."
+    echo "패키지 배포: conalog library publish --help"
+    echo "패키지 제거: uninstall (로컬 삭제) / unpublish (서버 숨김)"
+    echo "전체 명령어: conalog library --help"
     echo ""
 }
 
