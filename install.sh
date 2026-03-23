@@ -359,12 +359,10 @@ main() {
     check_path
 
     echo "Next steps:"
-    echo "  1. conalog-library login             # Google 인증"
-    echo "  2. conalog-library list              # 패키지 목록 조회"
-    echo "  3. conalog-library install <name>    # 패키지 설치"
+    echo "  1. conalog-library login    # Google 인증 (최초 1회)"
+    echo "  2. LLM이 API 가이드를 읽고 패키지를 자동으로 검색/설치"
     echo ""
-    echo "패키지 배포: conalog-library publish --help"
-    echo "패키지 제거: uninstall (로컬 삭제) / unpublish (서버 숨김)"
+    echo "API 가이드: GET /api/library/guide"
     echo "전체 명령어: conalog-library --help"
     echo ""
 }
