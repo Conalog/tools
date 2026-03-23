@@ -302,7 +302,7 @@ main() {
 
     check_download_tool
 
-    local platform version archive_name download_url checksum_url tmp_dir
+    local platform version archive_name download_url checksum_url
 
     platform=$(detect_platform)
     info "Platform: ${platform}"
