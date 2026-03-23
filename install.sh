@@ -138,8 +138,9 @@ detect_platform() {
     case "$uname_m" in
         x86_64|amd64)   arch="amd64" ;;
         arm64|aarch64)  arch="arm64" ;;
-        armv6l)         arch="armv6" ;;
-        armv7l)         arch="armv7" ;;
+        armv6l|armv7l)
+            error "32-bit ARM is not supported. Supported: x86_64, arm64"
+            ;;
         *)
             error "Unsupported architecture: ${uname_m}. Supported: x86_64, arm64"
             ;;

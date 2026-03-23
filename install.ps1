@@ -8,6 +8,8 @@
 #   CONALOG_INSTALL_DIR - Install directory (default: $HOME\.conalog\bin)
 
 $ErrorActionPreference = "Stop"
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$ProgressPreference = "SilentlyContinue"
 
 $Repo = "Conalog/tools"
 $BinaryName = "conalog-library.exe"
@@ -24,13 +26,15 @@ function Write-Ok { param([string]$Message) Write-Host "==> $Message" -Foregroun
 # ── Platform detection ──────────────────────────────────────
 
 function Get-Platform {
-    $arch = if ([Environment]::Is64BitOperatingSystem) { "amd64" } else { "386" }
+    if (-not [Environment]::Is64BitOperatingSystem) {
+        Write-Err "32-bit Windows is not supported. Supported: windows_amd64"
+    }
 
     if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") {
         Write-Err "Windows ARM64 is not supported. Supported: windows_amd64"
     }
 
-    return "windows_$arch"
+    return "windows_amd64"
 }
 
 # ── Version resolution ──────────────────────────────────────
@@ -121,11 +125,11 @@ function Add-ToUserPath {
     param([string]$Dir)
 
     $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
-    if ($currentPath -split ";" | Where-Object { $_ -eq $Dir }) {
+    if ($currentPath -and ($currentPath -split ";" | Where-Object { $_ -eq $Dir })) {
         return
     }
 
-    $newPath = "$currentPath;$Dir"
+    $newPath = if ($currentPath) { "$currentPath;$Dir" } else { $Dir }
     [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
     $env:Path = "$env:Path;$Dir"
     Write-Info "Added $Dir to user PATH (restart terminal to take effect)"
@@ -164,7 +168,11 @@ function Install-Conalog {
     try {
         # Download
         Write-Info "Downloading $archiveName..."
-        Invoke-Download -Url $checksumUrl -Dest (Join-Path $tmpDir "checksums.txt")
+        try {
+            Invoke-Download -Url $checksumUrl -Dest (Join-Path $tmpDir "checksums.txt")
+        } catch {
+            Write-Warn "Could not download checksums.txt. Skipping verification."
+        }
         Invoke-Download -Url $downloadUrl -Dest (Join-Path $tmpDir $archiveName)
 
         # Verify checksum
@@ -185,6 +193,9 @@ function Install-Conalog {
 
         # Install
         $source = Join-Path $tmpDir $BinaryName
+        if (-not (Test-Path $source)) {
+            Write-Err "Binary not found in archive. Expected: $BinaryName"
+        }
         $dest = Join-Path $installDir $BinaryName
         Write-Info "Installing to $dest..."
         Copy-Item -Path $source -Destination $dest -Force
