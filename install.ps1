@@ -200,6 +200,8 @@ function Install-Conalog {
         Write-Host "  3. conalog library list              # Browse available packages"
         Write-Host "  4. conalog library install <name>    # Install a package"
         Write-Host ""
+        Write-Host "Run 'conalog library --help' to see all commands (publish, uninstall, etc.)."
+        Write-Host ""
     } finally {
         Remove-Item -Path $tmpDir -Recurse -Force -ErrorAction SilentlyContinue
     }

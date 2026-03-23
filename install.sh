@@ -363,6 +363,8 @@ main() {
     echo "  2. conalog library list              # Browse available packages"
     echo "  3. conalog library install <name>    # Install a package"
     echo ""
+    echo "Run 'conalog library --help' to see all commands (publish, uninstall, etc.)."
+    echo ""
 }
 
 main "$@"
