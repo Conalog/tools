@@ -11,7 +11,7 @@
 curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
 
 # 2. 로그인 (Google OAuth, 브라우저가 자동으로 열림)
-conalog login
+conalog library login
 
 # 3. 모든 스킬/에이전트 설치
 conalog library install --all
@@ -21,7 +21,7 @@ Windows (PowerShell):
 
 ```powershell
 irm https://raw.githubusercontent.com/Conalog/tools/main/install.ps1 | iex
-conalog login
+conalog library login
 conalog library install --all
 ```
 
@@ -43,17 +43,15 @@ curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
 
 ## 사용법
 
-### 인증
+### `conalog library` (`conalog lib`)
 
 ```bash
-conalog login          # Google OAuth 로그인
-conalog whoami         # 현재 인증 상태 확인
-conalog logout         # 저장된 인증 정보 삭제
-```
+# 인증
+conalog library login                      # Google OAuth 로그인
+conalog library whoami                     # 현재 인증 상태 확인
+conalog library logout                     # 저장된 인증 정보 삭제
 
-### 라이브러리 (`conalog library` / `conalog lib`)
-
-```bash
+# 패키지 검색 / 조회
 conalog library search <query>          # 패키지/리소스 검색
 conalog library list                    # 설치 가능한 패키지 목록
 conalog library list --installed        # 로컬에 설치된 패키지 확인
@@ -87,9 +85,11 @@ conalog library publish ./my-skill \
 conalog library publish ./my-skill \
   --slug my-skill --version 0.2.0 --changelog "버그 수정"
 
-# 패키지 deprecation
+# 패키지 deprecation / unpublish
 conalog library deprecate <slug> -m "대체 패키지: new-skill"
 conalog library deprecate <slug> --undo    # deprecation 해제
+conalog library unpublish <slug>           # 패키지 삭제 (soft delete)
+conalog library unpublish <slug> -y        # 확인 없이 삭제
 ```
 
 | 플래그 | 설명 |
@@ -107,4 +107,4 @@ conalog library deprecate <slug> --undo    # deprecation 해제
 | 환경변수 | 설명 |
 |----------|------|
 | `CONALOG_SERVER` | 서버 주소 override (기본값 내장) |
-| `CONALOG_TOKEN` | CI/CD용 인증 토큰 (`conalog login` 대체) |
+| `CONALOG_TOKEN` | CI/CD용 인증 토큰 (`conalog library login` 대체) |
