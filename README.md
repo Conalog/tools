@@ -51,7 +51,7 @@ CI/CD 환경에서는 `CONALOG_TOKEN` 환경변수로 토큰을 직접 지정할
 
 LLM(Claude Code, Codex 등)은 아래 엔드포인트를 통해 패키지를 관리합니다.
 
-- **API 가이드**: `GET /api/library/guide` — 인증, 검색, 다운로드, 설치, 배포 방법을 구조화된 JSON으로 제공 (인증 불필요)
+- **API 가이드**: `GET /api/library/guide` — 인증, 검색, 다운로드, 설치, 배포 방법을 Markdown으로 제공 (인증 필요)
 - **API 문서**: `/docs` (Swagger UI)
 
 ### 설치 경로
