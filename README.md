@@ -1,6 +1,6 @@
 # conalog-library
 
-사내 라이브러리에서 Codex Skills, Agents를 관리하는 인증 CLI + LLM 연동 도구.
+사내 라이브러리에서 Codex / Claude Code Skills, Agents를 관리하는 인증 CLI + LLM 연동 도구.
 CLI는 인증(login/logout/whoami/guide)만 담당하고, 패키지 검색·설치·배포는 LLM이 REST API를 직접 호출하여 수행합니다.
 
 **이 문서는 LLM(Claude Code, Codex 등)이 읽고 실행하는 운영 가이드입니다.**
