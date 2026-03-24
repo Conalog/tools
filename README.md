@@ -56,7 +56,7 @@ conalog-library guide
 ```
 
 > **중요: 이 명령의 출력(Markdown)이 이후 모든 작업의 API 레퍼런스입니다.**
-> 가이드에 패키지 검색, 다운로드, 설치, 로컬 관리, 배포 방법이 모두 포함되어 있습니다.
+> 가이드에 패키지 검색, 다운로드, 설치, 로컬 관리, 배포, 리소스 관리 방법이 모두 포함되어 있습니다.
 > 가이드 내용을 기반으로 아래 3단계를 진행하세요.
 
 ### 3단계: 사용자에게 작업 선택지 제시
@@ -67,8 +67,11 @@ conalog-library guide
 2. **설치된 패키지 확인** — 로컬에 설치된 패키지 목록 조회
 3. **패키지 설치** — 특정 Skill 또는 Agent 다운로드 및 설치
 4. **패키지 배포** — 새 패키지를 라이브러리에 업로드
+5. **리소스 검색/조회** — 문서형 리소스 검색 및 열람
+6. **리소스 작성** — 새 리소스(HTML 문서) 생성
+7. **리소스 관리** — 기존 리소스 수정 또는 삭제
 
-사용자 선택에 따라 가이드의 해당 섹션(Search, Local Package Management, Download+Installation, Publish)을 참조하여 실행하세요.
+사용자 선택에 따라 가이드의 해당 섹션(Search, Local Package Management, Download+Installation, Publish, Resources)을 참조하여 실행하세요.
 
 ---
 
