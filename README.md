@@ -1,26 +1,9 @@
 # conalog-library
 
-사내 라이브러리에서 Codex / Claude Code Skills, Agents를 관리하는 인증 CLI + LLM 연동 도구.
-CLI는 인증(login/logout/whoami/guide)만 담당하고, 패키지 검색·설치·배포는 LLM이 REST API를 직접 호출하여 수행합니다.
+사내 라이브러리에서 Codex / Claude Code Skills, Agents를 관리하는 인증 CLI.
+CLI는 인증(login/logout/whoami/docs)만 담당하고, 패키지 검색·설치·배포는 LLM이 REST API를 직접 호출하여 수행합니다.
 
-**이 문서는 LLM(Claude Code, Codex 등)이 읽고 실행하는 운영 가이드입니다.**
-
----
-
-## LLM 실행 가이드
-
-이 파일을 읽는 LLM은 아래 순서대로 진행하세요.
-0~2단계는 사용자 개입 없이 자동으로 순서대로 실행하세요.
-설치나 로그인이 필요한 경우에만 멈추고 사용자에게 안내하세요.
-
-### 0단계: CLI 설치 확인
-
-```bash
-command -v conalog-library
-```
-
-- 명령이 존재하면 → 버전 확인 없이 즉시 1단계로 진행하세요 (사용자에게 묻지 마세요)
-- 명령이 없으면 → 아래 설치 명령을 사용자에게 안내하고 설치 완료 후 1단계로
+## 설치
 
 **macOS / Linux:**
 
@@ -34,59 +17,7 @@ curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
 irm https://raw.githubusercontent.com/Conalog/tools/main/install.ps1 | iex
 ```
 
-### 1단계: 로그인 상태 확인
-
-```bash
-conalog-library whoami
-```
-
-- `Logged in as <email>` 출력 → 2단계로
-- 그 외(`Not logged in` / `Token status: invalid or expired`) → 사용자에게 아래 명령 실행을 요청하세요
-
-```bash
-conalog-library login   # 브라우저로 Google OAuth 인증
-```
-
-로그인 완료 → 2단계로
-
-### 2단계: API 가이드 획득
-
-```bash
-conalog-library guide
-```
-
-> **중요: 이 명령의 출력(Markdown)이 이후 모든 작업의 API 레퍼런스입니다.**
-> 가이드에 패키지 검색, 다운로드, 설치, 로컬 관리, 배포, 리소스 관리 방법이 모두 포함되어 있습니다.
-> 가이드 내용을 기반으로 아래 3단계를 진행하세요.
-
-### 3단계: 사용자에게 작업 선택지 제시
-
-가이드를 획득한 후, 사용자에게 원하는 작업을 물어보세요:
-
-1. **패키지 검색** — 키워드로 Skills / Agents 검색
-2. **설치된 패키지 확인** — 로컬에 설치된 패키지 목록 조회
-3. **패키지 설치** — 특정 Skill 또는 Agent 다운로드 및 설치
-4. **패키지 배포** — 새 패키지를 라이브러리에 업로드
-5. **리소스 검색/조회** — 문서형 리소스 검색 및 열람
-6. **리소스 작성** — 새 리소스(HTML 문서) 생성
-7. **리소스 관리** — 기존 리소스 수정 또는 삭제
-
-사용자 선택에 따라 가이드의 해당 섹션(Search, Local Package Management, Download+Installation, Publish, Resources)을 참조하여 실행하세요.
-
----
-
-## CLI 명령어
-
-```bash
-conalog-library login     # Google OAuth 로그인 (완료 후 가이드 자동 출력)
-conalog-library guide     # API 가이드 출력 (이미 로그인된 상태에서 재획득)
-conalog-library logout    # 저장된 인증 정보 삭제
-conalog-library whoami    # 현재 로그인 상태 확인
-```
-
-CI/CD 환경에서는 `CONALOG_TOKEN` 환경변수로 토큰을 직접 지정할 수 있습니다.
-
-## 설치 옵션
+또는 [GitHub Releases](https://github.com/Conalog/tools/releases)에서 바이너리를 직접 다운로드.
 
 ```bash
 # 특정 버전 설치
@@ -96,7 +27,17 @@ curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash
 curl -sSL https://raw.githubusercontent.com/Conalog/tools/main/install.sh | bash -s -- --bin-dir ~/.local/bin
 ```
 
-또는 [GitHub Releases](https://github.com/Conalog/tools/releases)에서 바이너리를 직접 다운로드.
+## 사용법
+
+```bash
+conalog-library login     # Google OAuth 로그인 (브라우저가 자동으로 열림)
+conalog-library docs      # 인증된 API 문서를 브라우저에서 열기
+conalog-library logout    # 저장된 인증 정보 삭제
+conalog-library whoami    # 현재 로그인 상태 확인
+conalog-library auth-info # 인증 파일 경로와 서버 정보 확인
+```
+
+로그인 후 LLM이 인증된 OpenAPI 문서(`/docs`, `/openapi.json`)를 읽고 패키지를 자동으로 검색·설치합니다.
 
 ## 설정
 
