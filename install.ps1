@@ -208,9 +208,8 @@ function Install-Conalog {
         Write-Host "Next steps:"
         Write-Host "  1. Restart your terminal (or open a new one)"
         Write-Host "  2. conalog-library login    # Google 인증 (최초 1회)"
-        Write-Host "  3. LLM이 API 가이드를 읽고 패키지를 자동으로 검색/설치"
+        Write-Host "  3. conalog-library docs     # 브라우저에서 API 문서 열기"
         Write-Host ""
-        Write-Host "API 가이드: GET /api/library/guide"
         Write-Host "전체 명령어: conalog-library --help"
         Write-Host ""
     } finally {
