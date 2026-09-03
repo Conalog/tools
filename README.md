@@ -1,4 +1,23 @@
-# conalog-library
+# Conalog tools
+
+Conalog 운영 도구의 공개 설치 진입점을 제공한다. 각 도구의 소스 저장소와 릴리스가 실제 바이너리, 버전과 체크섬을 소유한다.
+
+## edge-access
+
+Edge에 SSH로 접속하는 운영자 CLI다. macOS와 Linux에서 다음 한 줄로 최신 버전을 설치하거나 갱신한다.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Conalog/tools/main/install-edge-access.sh | bash
+```
+
+비공개 `Conalog/edge-access` 릴리스를 읽을 수 있도록 [GitHub CLI](https://cli.github.com/)가 인증돼 있어야 한다. 설치 프로그램은 운영체제와 CPU에 맞는 최신 바이너리를 선택하고 체크섬을 검증한 뒤 `~/.local/bin/edge-access`에 설치한다.
+
+```bash
+edge-access login
+edge-access ssh <edge_id>
+```
+
+## conalog-library
 
 사내 라이브러리에서 Codex / Claude Code Skills, Agents를 관리하는 인증 CLI.
 CLI는 인증(login/logout/whoami/docs)만 담당하고, 패키지 검색·설치·배포는 LLM이 REST API를 직접 호출하여 수행합니다.
