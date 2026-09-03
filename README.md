@@ -10,7 +10,9 @@ Edge에 SSH로 접속하는 운영자 CLI다. macOS와 Linux에서 다음 한 �
 curl -fsSL https://raw.githubusercontent.com/Conalog/tools/main/install-edge-access.sh | bash
 ```
 
-비공개 `Conalog/edge-access` 릴리스를 읽을 수 있도록 [GitHub CLI](https://cli.github.com/)가 인증돼 있어야 한다. 설치 프로그램은 운영체제와 CPU에 맞는 최신 바이너리를 선택하고 체크섬을 검증한 뒤 `~/.local/bin/edge-access`에 설치한다.
+비공개 `Conalog/edge-access` 릴리스를 읽을 수 있도록 [GitHub CLI](https://cli.github.com/)에 권한 있는 계정이 하나 이상 인증돼 있어야 한다. 여러 계정이 있으면 설치 프로그램이 저장소를 읽을 수 있는 계정을 자동으로 사용한다. 전역 계정은 바꾸지 않는다. `GH_TOKEN` 또는 `GITHUB_TOKEN`을 지정하면 해당 토큰만 사용한다.
+
+설치 프로그램은 운영체제와 CPU에 맞는 최신 바이너리를 선택하고 체크섬을 검증한 뒤 `~/.local/bin/edge-access`에 설치한다.
 
 ```bash
 edge-access login
